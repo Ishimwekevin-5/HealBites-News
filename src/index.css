@@ -1,0 +1,76 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&family=Roboto+Mono:wght@400;500;700&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-display: "Roboto", sans-serif;
+  --font-serif: "Roboto", sans-serif;
+  --font-body: "Roboto", sans-serif;
+  --font-sans: "Roboto", sans-serif;
+  --font-mono: "Roboto Mono", monospace;
+
+  --color-wired-black: #000000;
+  --color-page-ink: #1a1a1a;
+  --color-paper-white: #ffffff;
+  --color-link-blue: #00a884;
+  --color-hairline-tint: #e2e8f0;
+  --color-caption-gray: #757575;
+}
+
+@layer base {
+  body {
+    @apply bg-paper-white text-page-ink font-body antialiased;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-display font-normal uppercase;
+  }
+
+  /* Strict square corners */
+  * {
+    @apply rounded-none;
+  }
+
+  /* Exceptions for icons and pills */
+  .rounded-full-pill {
+    @apply rounded-[1920px];
+  }
+
+  .rounded-circle {
+    @apply rounded-full;
+  }
+}
+
+@layer components {
+  .hairline-b {
+    @apply border-b border-hairline-tint;
+  }
+  .hairline-r {
+    @apply border-r border-hairline-tint;
+  }
+  .hairline-t {
+    @apply border-t border-hairline-tint;
+  }
+  .hairline-l {
+    @apply border-l border-hairline-tint;
+  }
+
+  .wired-kicker {
+    @apply font-mono text-[11px] uppercase tracking-[1.5px] mb-2 block;
+  }
+
+  .wired-headline-hero {
+    @apply font-display font-black text-[72px] leading-[0.9] tracking-[-0.02em] hover:text-link-blue transition-colors duration-150 uppercase;
+  }
+
+  .wired-headline-grid {
+    @apply font-display font-bold text-[22px] leading-[1.1] hover:text-link-blue transition-colors duration-150 uppercase;
+  }
+
+  .wired-btn-primary {
+    @apply border-2 border-wired-black bg-paper-white text-wired-black font-sans font-bold text-[14px] uppercase tracking-[0.3px] px-5 py-2 hover:bg-wired-black hover:text-paper-white transition-colors duration-150;
+  }
+
+  .wired-ribbon {
+    @apply bg-wired-black text-paper-white font-mono font-bold text-[11px] uppercase tracking-[1.5px] py-1 px-3 inline-block;
+  }
+}
