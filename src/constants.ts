@@ -9,6 +9,10 @@ export const HERO_STORY: Story = {
   timestamp: '2 HOURS AGO',
   imageUrl: 'https://picsum.photos/seed/health-longevity/1200/675',
   category: 'Medicine',
+  footage: [
+    'https://picsum.photos/seed/longevity-1/1200/675',
+    'https://picsum.photos/seed/longevity-2/1200/675'
+  ]
 };
 
 export const GRID_STORIES: Story[] = [
@@ -21,6 +25,7 @@ export const GRID_STORIES: Story[] = [
     timestamp: '4 HOURS AGO',
     imageUrl: 'https://picsum.photos/seed/nutrition-gut/800/600',
     category: 'Nutrition',
+    footage: ['https://picsum.photos/seed/gut-1/800/600']
   },
   {
     id: 'grid-2',

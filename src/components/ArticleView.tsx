@@ -79,45 +79,37 @@ export default function ArticleView({ story, onClose }: ArticleViewProps) {
               This move has sparked significant debate regarding the intersection of personal faith and public office, raising questions about the boundaries of religious expression within government communications.
             </p>
             
-            {/* Paywall / CTA Section */}
-            <div className="mt-16 pt-16 border-t border-hairline-tint flex flex-col items-center text-center">
-              <h2 className="font-display font-black text-[32px] lg:text-[42px] mb-6">
-                You’ve read your last free article.
-              </h2>
-              
-              <div className="w-full max-w-md aspect-video bg-hairline-tint mb-8 overflow-hidden">
-                <img 
-                  src="https://picsum.photos/seed/paywall/800/450" 
-                  alt="Premium Content" 
-                  className="w-full h-full object-cover grayscale opacity-80"
-                />
+            {/* Footage Section */}
+            {story.footage && story.footage.length > 0 && (
+              <div className="mt-16 pt-16 border-t border-hairline-tint flex flex-col gap-12">
+                <h2 className="font-display font-black text-[32px] lg:text-[42px] uppercase tracking-tight">
+                  Related Footage
+                </h2>
+                <div className="grid grid-cols-1 gap-8">
+                  {story.footage.map((url, index) => (
+                    <div key={index} className="w-full aspect-video bg-hairline-tint overflow-hidden">
+                      {url.endsWith('.mp4') || url.includes('video') ? (
+                        <video 
+                          src={url} 
+                          controls 
+                          className="w-full h-full object-cover"
+                        />
+                      ) : (
+                        <img 
+                          src={url} 
+                          alt={`Footage ${index + 1}`} 
+                          className="w-full h-full object-cover"
+                          referrerPolicy="no-referrer"
+                        />
+                      )}
+                    </div>
+                  ))}
+                </div>
               </div>
-
-              <p className="font-body text-[16px] text-page-ink mb-8 max-w-lg">
-                The intersection of health, science, and longevity. Start your free trial and get access to <span className="font-bold">5 all-new premium newsletters</span>—cancel anytime.
-              </p>
-
-              <button className="bg-wired-black text-paper-white font-sans font-black text-[14px] uppercase tracking-[2px] px-12 py-5 hover:bg-link-blue transition-colors mb-4">
-                START FREE TRIAL
-              </button>
-              
-              <a href="#" className="font-sans text-[12px] font-bold text-caption-gray hover:text-page-ink transition-colors">
-                Already a subscriber? Sign In
-              </a>
-            </div>
+            )}
           </div>
         </div>
       </article>
-
-      {/* Bottom Sticky Bar */}
-      <div className="fixed bottom-0 left-0 right-0 bg-paper-white border-t border-wired-black py-4 px-8 flex justify-center items-center shadow-[0_-4px_20px_rgba(0,0,0,0.05)] z-50">
-        <p className="font-mono text-[11px] tracking-widest text-center">
-          THE INTERSECTION OF HEALTH, SCIENCE, AND LONGEVITY. START YOUR FREE TRIAL AND GET ACCESS TO 5 ALL-NEW PREMIUM NEWSLETTERS. 
-          <a href="#" className="font-bold border-b-2 border-wired-black ml-2 hover:text-link-blue hover:border-link-blue transition-colors">
-            START FREE TRIAL
-          </a>
-        </p>
-      </div>
     </div>
   );
 }

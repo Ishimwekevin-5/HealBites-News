@@ -7,4 +7,5 @@ export interface Story {
   timestamp: string;
   imageUrl: string;
   category: string;
+  footage?: string[];
 }
