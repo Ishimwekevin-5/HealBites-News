@@ -3,12 +3,19 @@ import { createServer as createViteServer } from "vite";
 import path from "path";
 import { fileURLToPath } from "url";
 
+// This file is used for LOCAL DEVELOPMENT to simulate the full-stack environment.
+// For Vercel production, Vercel uses the 'api/index.ts' entry point for serverless functions
+// and serves the 'dist' folder statically.
+
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 async function startServer() {
   const app = express();
   const PORT = 3000;
+
+  // JSON parsing
+  app.use(express.json());
 
   // API routes
   app.get("/api/health", (req, res) => {
@@ -31,7 +38,7 @@ async function startServer() {
     });
     app.use(vite.middlewares);
   } else {
-    // Production serving
+    // Production serving (Fallback for non-Vercel environments)
     const distPath = path.join(process.cwd(), "dist");
     app.use(express.static(distPath));
     app.get("*", (req, res) => {
