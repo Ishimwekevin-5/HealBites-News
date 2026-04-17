@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Header from './components/Header';
 import HeroSection from './components/HeroSection';
 import Footer from './components/Footer';
@@ -13,6 +13,14 @@ import { Story } from './types';
 
 export default function App() {
   const [selectedStory, setSelectedStory] = useState<Story | null>(null);
+
+  useEffect(() => {
+    if (selectedStory) {
+      document.title = `${selectedStory.headline} | HealBites News`;
+    } else {
+      document.title = 'HealBites News';
+    }
+  }, [selectedStory]);
 
   const handleOpenStory = (story: Story) => {
     setSelectedStory(story);
