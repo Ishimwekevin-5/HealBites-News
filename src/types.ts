@@ -1,3 +1,8 @@
+export interface User {
+  name: string;
+  email: string;
+}
+
 export interface Story {
   id: string;
   kicker: string;

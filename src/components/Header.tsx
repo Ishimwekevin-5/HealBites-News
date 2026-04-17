@@ -1,6 +1,13 @@
-import { Search, User, Menu } from 'lucide-react';
+import { Search, User as UserIcon, Menu } from 'lucide-react';
+import { User } from '../types';
 
-export default function Header() {
+interface HeaderProps {
+  user: User | null;
+  onShowAuth: () => void;
+  onShowProfile: () => void;
+}
+
+export default function Header({ user, onShowAuth, onShowProfile }: HeaderProps) {
   return (
     <header className="w-full bg-paper-white border-b border-wired-black">
       <div className="max-w-[1600px] mx-auto h-14 flex items-center px-4 justify-between">
@@ -36,15 +43,28 @@ export default function Header() {
 
         {/* Right: Icons + Links */}
         <div className="flex items-center gap-6">
-          <button className="p-1">
-            <User size={20} />
+          <button 
+            className="p-1 hover:text-link-blue transition-colors"
+            onClick={user ? onShowProfile : onShowAuth}
+          >
+            <UserIcon size={20} className={user ? "text-link-blue" : ""} />
           </button>
           <a href="#" className="font-sans text-[11px] font-bold tracking-[0.5px] text-page-ink hover:text-link-blue transition-colors">
             NEWSLETTERS
           </a>
-          <a href="#" className="font-sans text-[11px] font-bold tracking-[0.5px] text-link-blue hover:underline transition-colors">
-            SUBSCRIBE
-          </a>
+          {!user && (
+            <button 
+              onClick={onShowAuth}
+              className="font-sans text-[11px] font-bold tracking-[0.5px] text-link-blue hover:underline transition-colors uppercase"
+            >
+              SUBSCRIBE
+            </button>
+          )}
+          {user && (
+            <span className="font-sans text-[11px] font-black tracking-[1px] text-wired-black">
+              HI, {user.name.toUpperCase()}
+            </span>
+          )}
         </div>
       </div>
     </header>
